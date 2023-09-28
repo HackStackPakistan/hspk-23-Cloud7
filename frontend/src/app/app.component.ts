@@ -30,14 +30,14 @@ export class AppComponent implements OnInit {
         this.router.events
         .subscribe((event) => {
             if ( event instanceof NavigationStart ) {
-                $('.preloader').fadeIn('slow');
+                $('.preloader').fadeIn(10);
             }
         });
         this.routerSubscription = this.router.events
         .pipe(filter(event => event instanceof NavigationEnd || event instanceof NavigationCancel))
         .subscribe(event => {
             $.getScript('../assets/js/custom.js');
-            $('.preloader').fadeOut('slow');
+            $('.preloader').fadeOut('slow', 'swing');
             this.location = this.router.url;
             if (!(event instanceof NavigationEnd)) {
                 return;
