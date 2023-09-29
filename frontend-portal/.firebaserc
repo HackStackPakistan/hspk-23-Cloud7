@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "automark-ai": {
+      "hosting": {
+        "frontend-portal": [
+          "automark-admin-portal"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "automark-ai"
+  }
+}

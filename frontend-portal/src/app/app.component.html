@@ -1,0 +1,35 @@
+<nz-layout nzTheme="light">
+	<nz-header *ngIf="user$ | async as user" [@headerAnimation] nzTheme="light" fxLayout="row" fxLayoutAlign.gt-sm="space-between center" fxLayoutAlign.lt-md="center center">
+		<button nz-button nzGhost fxHide.gt-sm style="border: none; position: absolute; left: 16px; font-size: 20px;">
+			<i nz-icon nzType="menu" nzTheme="outline" style="font-size: 20px;"></i>
+		</button>
+		<div class="logo" fxLayout="row">
+			<img src="./../assets/images/logo.svg" alt="logo">
+		</div>
+		<div class="status" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="16px">
+			<div class="user" fxHide.lt-md>
+				<nz-avatar [nzText]="user.displayName?.[0]"></nz-avatar>
+				<a nz-popover [nzPopoverContent]="dropdown" nzPopoverTrigger="click" nzPopoverPlacement="bottomRight">
+					<span fxHide.lt-md>{{user.displayName}}</span>
+					<span fxHide.gt-sm>{{user.displayName?.split(' ')?.[0]}}</span>
+					<i nz-icon nzType="caret-down"></i>
+				</a>
+				<ng-template #dropdown>
+					<button nz-button nzType="text" (click)="logout()">Logout</button>
+				</ng-template>
+				<!-- <nz-dropdown-menu #menu="nzDropdownMenu">
+				</nz-dropdown-menu> -->
+			</div>
+		</div>
+	</nz-header>
+	<nz-layout class="content-layout" [ngClass]="{'sider-layout-logged-in': !!(user$ | async)}">
+		<nz-sider class="scr-sider" *ngIf="user$ | async as user" [@siderAnimation] fxHide.lt-md nzWidth="215px" nzCollapsible [nzCollapsedWidth]="80" [(nzCollapsed)]="isCollapsed" nzTheme="light">
+			<app-navigation [isCollapsed]="isCollapsed"></app-navigation>
+		</nz-sider>
+		<nz-layout class="inner-layout">
+			<nz-content [@routeAnimations]="prepareRoute(outlet)">
+				<router-outlet #outlet="outlet"></router-outlet>
+			</nz-content>
+		</nz-layout>
+	</nz-layout>
+</nz-layout>

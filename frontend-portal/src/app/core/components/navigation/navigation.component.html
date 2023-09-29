@@ -1,0 +1,11 @@
+<ng-container *ngIf="user$ | async as user">
+	<ul nz-menu nzMode="inline" class="sider-menu">
+		<li nz-menu-group >
+			<span *ngIf="!isCollapsed" title style="font-size:16px; color: #ccc;">Control</span>
+			<ul>
+				<li nz-menu-item nzMatchRouter="true" nzMatchRouterExact="true" routerLink="/admin"><i nz-icon nzType="dashboard"></i><span *ngIf="!isCollapsed">Dashboard</span></li>
+				<li nz-menu-item nzMatchRouter="true" routerLink="/admin/config"><i nz-icon nzType="user"></i><span *ngIf="!isCollapsed">Configuration</span></li>
+			</ul>
+		</li>
+	</ul>
+</ng-container>
