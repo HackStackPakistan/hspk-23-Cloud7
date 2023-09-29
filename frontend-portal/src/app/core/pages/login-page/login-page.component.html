@@ -1,0 +1,32 @@
+<div class="container d-fx fx-d-c fx-jc-c fx-ai-c" fxLayout="column" fxLayoutAlign="center center">
+	<div class="logo" routerLink="/login">
+		<img src="./../assets/images/logo.svg" alt="logo">
+	</div>
+	<div id="formBorder">
+		<form nz-form [formGroup]="loginForm" class="login-form" (ngSubmit)="login()">
+			<nz-form-item>
+				<nz-form-control [nzErrorTip]="emailErrTpl">
+					<nz-input-group [nzSize]="'large'" nzPrefixIcon="user">
+						<input type="email" nz-input formControlName="email" placeholder="Email" />
+					</nz-input-group>
+					<ng-template #emailErrTpl let-control>
+						<ng-container *ngIf="control.hasError('email')">Invalid Email</ng-container>
+						<ng-container *ngIf="control.hasError('required')">Please Enter Email</ng-container>
+					</ng-template>
+				</nz-form-control>
+			</nz-form-item>
+			<nz-form-item style="margin-bottom: 0;">
+				<nz-form-control nzErrorTip="Please Enter Password">
+					<nz-input-group nzSize="large" nzPrefixIcon="lock" [nzSuffix]="visibilityBtn">
+						<input [type]="(isVisible) ? 'text' : 'password'" nz-input formControlName="password" placeholder="Password" />
+					</nz-input-group>
+					<ng-template #visibilityBtn>
+						<i nz-icon [nzType]="(isVisible) ? 'eye' : 'eye-invisible'" (click)="isVisible = !isVisible"></i>
+					</ng-template>
+				</nz-form-control>
+			</nz-form-item>
+			<!-- <button type="button" nz-button class="forgot-password-button" nzType="link" routerLink="/customer/forgot">Forgot Password</button> -->
+			<button nz-button class="login-form-button" [nzLoading]="isLoading" nzType="primary" style="margin-top: 15px;">Log in</button>
+		</form>
+	</div>
+</div>

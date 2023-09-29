@@ -1,0 +1,65 @@
+@import "./core/less/variables.less";
+
+.ant-layout-header {
+	background-color: #ebebeb;
+	padding: 0;
+}
+
+.logo {
+
+	img {
+		height: 32px;
+	}
+}
+
+
+.status {
+	margin-right: 24px;
+
+	.user {
+		background-color: #202020;
+		box-shadow: 0 4px 16px rgba(@black, 0.1);
+		border-radius: 120px;
+		padding: 4px;
+		line-height: 1;
+
+		a {
+			margin: 0 10px 0 5px;
+			color: #fff;
+
+			i {
+				margin-left: 10px;
+				vertical-align: middle;
+			}
+		}
+	}
+}
+
+.content-layout {
+	position: relative;
+	flex-direction: row;
+	.scr-sider {
+		min-height: calc(100vh - 64px);
+	}
+	
+	&.sider-layout-logged-in {
+		min-height: calc(100vh - 64px);
+
+
+		.ant-layout.inner-layout {
+			padding: 12px;
+		}
+	}
+}
+
+.ant-layout-sider-collapsed {
+	::ng-deep .ant-menu-item {
+		text-align: center;
+		padding: 0 !important;
+		justify-content: center;
+	}
+}
+
+::ng-deep .ant-menu-item {
+	font-family: 'Fira Sans Bold';
+}
