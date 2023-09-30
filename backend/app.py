@@ -36,7 +36,8 @@ async def index():
 
 @app.post("/Gen")
 async def get_user(content: Dict):
-    data = content.dict()
+    # data = content.dict()
+    data = content
     if not "user_id" in data:
         return {"error": True, "message": "user_id is required", "data": ""}
         # user exists in firebase?
