@@ -1,11 +1,10 @@
 from fastapi import FastAPI, Request
-from models import Content
 from typing import Dict
 import httpx
 import google.generativeai as palm
-import os
+import cred
 
-palm.configure(api_key=os.environ.get("PALM_API"))
+palm.configure(api_key=cred.PALM_API)
 
 app = FastAPI()
 
@@ -36,7 +35,6 @@ async def index():
 
 @app.post("/Gen")
 async def get_user(content: Dict):
-    # data = content.dict()
     data = content
     if not "user_id" in data:
         return {"error": True, "message": "user_id is required", "data": ""}
