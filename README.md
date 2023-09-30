@@ -52,8 +52,8 @@ AutoMark is built using the following technologies:
 
 - Angular
 - Firebase
-- LLM Langchain(OpenAI/Google)
-- PineCone
+- LLM (Google PaLM2)
+- FAST API
 
 
 ## Market Opportunity
@@ -71,7 +71,6 @@ AutoMark provides a seamless user journey for e-commerce owners and the AI side.
 - Users register and attach their e-commerce store.
 - They set their budget, target location, and branding.
 - On the AI side, AutoMark analyzes products and creates marketing plans.
-- It conducts research using the Facebook Ads library.
 - Multiple ad sets are designed and published across social media platforms.
 - Detailed reports are generated, and campaigns can be disabled if necessary.
 
