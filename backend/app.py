@@ -1,5 +1,4 @@
 from fastapi import FastAPI, Request
-from models import Content
 from typing import Dict
 import httpx
 import google.generativeai as palm
