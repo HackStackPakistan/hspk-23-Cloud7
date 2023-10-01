@@ -97,6 +97,11 @@ AutoMark's monetization strategy includes subscription plans for e-commerce owne
 
 Our team consists of four experts in AI, web development, and e-commerce marketing. We are well-equipped to develop and launch AutoMark successfully.
 
+- [Kamran Ansari](http://github.com/mkamranansari)
+- [Talib Farooq](https://github.com/mtalibfarooq)
+- [Mahad Ahmed](https://github.com/Mahad-lab)
+- [Talha Faisal](https://github.com/talha442)
+
 ## Future Plans
 
 We envision a bright future for AutoMark, including expansion plans, new features, and scaling the platform to serve a broader audience.
