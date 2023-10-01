@@ -132,8 +132,9 @@ To install the backend, follow these steps:
 
 2. Start the backend server by running the command:
    ````
-   python app.py
+   uvicorn app:app --reload
    ```
 
 These instructions will helpusers properly install and run both the frontend and backend components of automark app.
+
 ___________________________________________________
