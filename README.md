@@ -52,6 +52,8 @@ AutoMark is built using the following technologies:
 
 - Angular
 - Firebase
+- Express
+- Node
 - LLM (Google PaLM2)
 - FAST API
 
