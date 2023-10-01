@@ -28,13 +28,17 @@ module.exports.askPalm = async (req, res) => {
 				},
 			})
 
+		let output = null;
+		if (result?.[0]?.candidates?.[0]?.output)
+			output = JSON.parse(result?.[0]?.candidates?.[0]?.output)
+
 		Log.create({
 			userQuery: value,
-			response: result?.[0]?.candidates?.[0]?.output ?? null,
+			response: output,
 			user: userId
 		})
 
-		res.json({ status: 200, data: result[0].candidates[0].output });
+		res.json({ status: 200, data: output });
 	}
 	catch (e) {
 		console.log("ERROR: ", e);

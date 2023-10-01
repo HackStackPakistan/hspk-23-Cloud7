@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { LogsRoutingModule } from './logs-routing.module';
 import { LogsComponent } from './logs.component';
+import { NzTableModule } from 'ng-zorro-antd/table';
 
 
 @NgModule({
@@ -11,7 +12,9 @@ import { LogsComponent } from './logs.component';
   ],
   imports: [
     CommonModule,
-    LogsRoutingModule
+    LogsRoutingModule,
+    
+    NzTableModule,
   ]
 })
 export class LogsModule { }

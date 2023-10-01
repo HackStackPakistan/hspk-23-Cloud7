@@ -12,6 +12,18 @@ const routes = require("./routes");
 const app = express();
 require("./configuration/passport")(passport);
 
+const whitelist = process.env.ORIGIN ? process.env.ORIGIN.split(',') : '*'
+const corsOptions = {
+	origin: function (origin, callback) {
+		if (whitelist.indexOf(origin) !== -1) {
+			callback(null, true)
+		} else {
+			callback(new Error('Not allowed by CORS'))
+		}
+	}
+}
+
+console.log(process.env.ORIGIN.split(','));
 database.connect();
 
 app
@@ -21,7 +33,7 @@ app
 	.use(fileupload())
 	.use(passport.initialize())
 	.use(passport.session())
-	.use(cors())
+	.use(cors(whitelist !== '*' ? corsOptions : undefined))
 	.use(cookieParser())
 	.use(express.static(path.join(__dirname, "public")))
 

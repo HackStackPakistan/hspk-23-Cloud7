@@ -1,1 +1,18 @@
-<p>logs works!</p>
+<h1>Logs</h1>
+
+<nz-table [nzLoading]="loading.list" [nzData]="logs">
+	<thead>
+		<tr>
+			<th>Query</th>
+			<th>Response</th>
+			<th>User</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let logs of logs">
+			<td>{{logs.userQuery | json}}</td>
+			<td>{{logs.response | json}}</td>
+			<td>{{logs.user.fullName}}</td>
+		</tr>
+	</tbody>
+</nz-table>
