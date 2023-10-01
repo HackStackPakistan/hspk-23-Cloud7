@@ -23,8 +23,6 @@ AutoMark is an innovative solution for autonomously marketing, optimizing and bo
 - [Team and Expertise](#team-and-expertise)
 - [Future Plans](#future-plans)
 - [Installation](#installation)
-- [Usage](#usage)
-
 
 ## Introduction
 
@@ -138,10 +136,4 @@ To install the backend, follow these steps:
    ```
 
 These instructions will helpusers properly install and run both the frontend and backend components of automark app.
-
-## Usage
-
-[Insert Usage Instructions Here]
-
-
 ___________________________________________________
