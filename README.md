@@ -100,10 +100,39 @@ Our team consists of four experts in AI, web development, and e-commerce marketi
 ## Future Plans
 
 We envision a bright future for AutoMark, including expansion plans, new features, and scaling the platform to serve a broader audience.
-
 ## Installation
 
-[Insert Installation Instructions Here]
+### Frontend
+
+To install the frontend, follow these steps:
+
+1. Install the Angular CLI globally by running the command:
+   ````
+   npm install -g @angular/cli
+   ```
+
+2. Start the development server by running the command:
+   ````
+   ng serve
+   ```
+
+   Note that your app will be accessible at `localhost:4200` with the default port set to 4200.
+
+### Backend
+
+To install the backend, follow these steps:
+
+1. Install the required Python packages by running the command:
+   ````
+   pip install -r requirements.txt
+   ```
+
+2. Start the backend server by running the command:
+   ````
+   python app.py
+   ```
+
+These instructions will helpusers properly install and run both the frontend and backend components of automark app.
 
 ## Usage
 
