@@ -2,15 +2,19 @@ import { Store, createState, withProps, select } from '@ngneat/elf';
 
 export interface UserProps {
 	detail: {
-		displayName: string | null;
-		email: string | null;
-		phoneNumber: string | null;
-		photoURL: string | null;
-		providerId: string;
-		/**
-		 * The user's unique ID.
-		 */
-		uid: string;
+		_id: string;
+		fullName: string;
+		email: string;
+		role: string;
+		config: {
+			url: string;
+			apiKey: string;
+			secretKey: string;
+		} | null;
+		createdAt: string;
+		updatedAt: string;
+		iat: number;
+		exp: number;
 	} | null;
 }
 

@@ -1,12 +1,21 @@
 import { CanActivateFn, Router } from '@angular/router';
-import { authQ } from '../stores/auth.repository';
+import { userQ } from '../stores/user.repository';
 import { inject } from '@angular/core';
 
 export const routeGuard: CanActivateFn = (route, state) => {
-  const currentUser = authQ();
-  const router = inject(Router);
+  let router = inject(Router);
+
+  const currentUser = userQ();
+  // console.log("ROUTE: /", route.routeConfig.path);
+  // console.log("GUARD: ▼", currentUser?.role, " | ▲", route.data?.roles, " - ", (route.data.roles?.indexOf(currentUser?.role) !== -1));
   if (currentUser) {
-    return true;
+    if (route.data['roles'] && route.data['roles'].indexOf(currentUser.role) === -1) {
+      router.navigate(['/forbidden']);
+      return false;
+    }
+    else {
+      return true;
+    }
   }
   router.navigate(['/sign-in'], { queryParams: { returnUrl: state.url } });
   return false;

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { finalize } from 'rxjs';
+import { user$ } from '../../stores/user.repository';
 
 @Component({
   selector: 'app-login-page',
@@ -15,6 +16,8 @@ export class LoginPageComponent implements OnInit {
   router = inject(Router);
   authService = inject(AuthService);
 
+  user$ = user$;
+
   loginForm: FormGroup;
   returnUrl: string;
   isVisible = false;
@@ -26,12 +29,18 @@ export class LoginPageComponent implements OnInit {
       password: [null, [Validators.required]]
     });
 
+    user$.subscribe(x => {
+      if(x) {
+        this.router.navigate(['/', x?.role])
+      }
+    })
+
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   ngOnInit(): void { }
 
-  async login() {
+  login() {
     for (const i in this.loginForm.controls) {
       this.loginForm.controls[i].markAsDirty();
       this.loginForm.controls[i].updateValueAndValidity();
@@ -39,8 +48,13 @@ export class LoginPageComponent implements OnInit {
     if (this.loginForm.invalid) return;
 
     this.isLoading = true;
-    await this.authService.signIn(this.loginForm.value.email, this.loginForm.value.password);
-    this.isLoading = false;
+    this.authService.login(this.loginForm.value)
+      .pipe(finalize(() => {
+        this.isLoading = false;
+      }))
+      .subscribe(data => {
+        if (data) this.router.navigate([data.role]);
+      });
   }
 
 }

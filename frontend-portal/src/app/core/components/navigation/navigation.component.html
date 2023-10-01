@@ -1,11 +1,25 @@
 <ng-container *ngIf="user$ | async as user">
-	<ul nz-menu nzMode="inline" class="sider-menu">
-		<li nz-menu-group >
-			<span *ngIf="!isCollapsed" title style="font-size:16px; color: #ccc;">Control</span>
-			<ul>
-				<li nz-menu-item nzMatchRouter="true" nzMatchRouterExact="true" routerLink="/admin"><i nz-icon nzType="dashboard"></i><span *ngIf="!isCollapsed">Dashboard</span></li>
-				<li nz-menu-item nzMatchRouter="true" routerLink="/admin/config"><i nz-icon nzType="user"></i><span *ngIf="!isCollapsed">Configuration</span></li>
-			</ul>
-		</li>
-	</ul>
+	<ng-container *ngIf="user.role === 'admin'">
+		<ul nz-menu nzMode="inline" class="sider-menu">
+			<li nz-menu-group>
+				<span *ngIf="!isCollapsed" title style="font-size:16px; color: #ccc;">Control</span>
+				<ul>
+					<li nz-menu-item nzMatchRouter="true" nzMatchRouterExact="true" routerLink="/admin"><i nz-icon nzType="dashboard"></i><span *ngIf="!isCollapsed">Dashboard</span></li>
+					<li nz-menu-item nzMatchRouter="true" routerLink="/admin/users"><i nz-icon nzType="user"></i><span *ngIf="!isCollapsed">Users</span></li>
+				</ul>
+			</li>
+		</ul>
+	</ng-container>
+	<ng-container *ngIf="user.role === 'user'">
+		<ul nz-menu nzMode="inline" class="sider-menu">
+			<li nz-menu-group>
+				<span *ngIf="!isCollapsed" title style="font-size:16px; color: #ccc;">Control</span>
+				<ul>
+					<li nz-menu-item nzMatchRouter="true" nzMatchRouterExact="true" routerLink="/user"><i nz-icon nzType="dashboard"></i><span *ngIf="!isCollapsed">Dashboard</span></li>
+					<li nz-menu-item nzMatchRouter="true" routerLink="/user/config"><i nz-icon nzType="user"></i><span *ngIf="!isCollapsed">Configuration</span></li>
+					<li nz-menu-item nzMatchRouter="true" routerLink="/user/ask"><i nz-icon nzType="user"></i><span *ngIf="!isCollapsed">Take Advice</span></li>
+				</ul>
+			</li>
+		</ul>
+	</ng-container>
 </ng-container>

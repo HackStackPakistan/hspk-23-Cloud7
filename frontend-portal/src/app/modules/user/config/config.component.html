@@ -1,0 +1,35 @@
+<h1>Configuration</h1>
+
+<div id="formBorder">
+	<div class="spin" *ngIf="loading.init" [@fadeInOut]>
+		<ng-template #indicatorTemplate><span nz-icon nzType="loading"></span></ng-template>
+    <nz-spin nzSimple [nzIndicator]="indicatorTemplate" [nzSize]="'large'"></nz-spin>
+	</div>
+	<form nz-form [formGroup]="configForm" class="login-form">
+		<nz-form-item>
+			<nz-form-control nzErrorTip="Please Enter Url">
+				<nz-input-group [nzSize]="'large'">
+					<input type="text" nz-input formControlName="url" placeholder="Url" />
+				</nz-input-group>
+			</nz-form-control>
+		</nz-form-item>
+		<nz-form-item>
+			<nz-form-control nzErrorTip="Please Enter Api Key">
+				<nz-input-group [nzSize]="'large'">
+					<input type="text" nz-input formControlName="apiKey" placeholder="Api Key" />
+				</nz-input-group>
+			</nz-form-control>
+		</nz-form-item>
+		<nz-form-item style="margin-bottom: 0;">
+			<nz-form-control nzErrorTip="Please Enter Secret Key">
+				<nz-input-group nzSize="large" [nzSuffix]="visibilityBtn">
+					<input [type]="(isVisible) ? 'text' : 'password'" nz-input formControlName="secretKey" placeholder="Secret Key" />
+				</nz-input-group>
+				<ng-template #visibilityBtn>
+					<i nz-icon [nzType]="(isVisible) ? 'eye' : 'eye-invisible'" (click)="isVisible = !isVisible"></i>
+				</ng-template>
+			</nz-form-control>
+		</nz-form-item>
+		<button nz-button [nzLoading]="loading.update" nzType="primary" style="margin-top: 15px;" (click)="submit()">Update</button>
+	</form>
+</div>

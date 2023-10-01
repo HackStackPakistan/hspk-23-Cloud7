@@ -1,52 +1,47 @@
 import { Store, createState, withProps, select } from '@ngneat/elf';
 import { createRequestsCacheOperator, updateRequestCache, withRequestsCache } from '@ngneat/elf-requests';
 import { persistState, localStorageStrategy } from '@ngneat/elf-persist-state';
+import { delay, take } from 'rxjs';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { updateUserDetail, UserProps } from './user.repository';
 
+const helper = new JwtHelperService();
 export interface AuthProps {
-	details: {
-		displayName: string | null;
-		email: string | null;
-		phoneNumber: string | null;
-		photoURL: string | null;
-		providerId: string;
-		/**
-		 * The user's unique ID.
-		 */
-		uid: string;
-	} | null;
+	token: string | null;
 }
 
 const { state, config } = createState(
-	withProps<AuthProps>({ details: null }),
-	withRequestsCache<'auth'>()
+	withProps<AuthProps>({ token: null }),
+	withRequestsCache<'token'>()
 );
 
 const store = new Store({ name: 'auth', state, config });
 
 export const skipWhileAuthCached = createRequestsCacheOperator(store);
 
-export const auth$ = store.pipe(select(state => state.details));
-export const authQ = () => store.value.details;
+export const token$ = store.pipe(select(state => state.token));
+export const tokenQ = () => store.value.token;
 
 export const persist = persistState(store, {
 	key: 'auth',
 	storage: localStorageStrategy,
 });
 
-// persist.initialized$.pipe(take(1)).subscribe(x => {
-// 	if (x) {
-// 		let token = tokenQ();
-// 		let user: UserProps['detail'] = null;
-// 		if (token) user = helper.decodeToken(token);
-// 		updateUserDetail(user);
-// 	}
-// });
+persist.initialized$.pipe(take(1)).subscribe(x => {
+	if (x) {
+		let token = tokenQ();
+		let user: UserProps['detail'] = null;
+		if (token) user = helper.decodeToken(token);
+		console.log(user);
+		updateUserDetail(user);
+	}
+})
 
-export function updateAuthData(data: AuthProps['details']) {
-	store.update(updateRequestCache('auth'), (state) => ({
+export function updateAuthToken(data: AuthProps) {
+	store.update(updateRequestCache('token'), (state) => ({
 		...state,
 		...data
-	}));
+	}))
 }
 
 export function resetAuthStore() {

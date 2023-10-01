@@ -1,31 +1,69 @@
 @import "./core/less/variables.less";
 
 .ant-layout-header {
-	background-color: #ebebeb;
+	background-color: #333;
 	padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	@media (min-width: 768px) {
+		justify-content: space-between;
+	}
+}
+
+.btn-menu {
+	@media (min-width: 768px) {
+		display: none;
+	}
 }
 
 .logo {
+	display: flex;
 
 	img {
-		height: 32px;
+		height: 64px;
 	}
 }
 
 
 .status {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 16px;
 	margin-right: 24px;
 
 	.user {
-		background-color: #202020;
+		background-color: #fff;
 		box-shadow: 0 4px 16px rgba(@black, 0.1);
 		border-radius: 120px;
 		padding: 4px;
 		line-height: 1;
 
+		@media (max-width: 767px) {
+			display: none;
+		}
+
 		a {
 			margin: 0 10px 0 5px;
-			color: #fff;
+			color: #333;
+
+			.name-full {
+
+				// hide above max width
+				@media (max-width: 768px) {
+					display: none;
+				}
+			}
+
+			.name-first {
+
+				// hide below min-width
+				@media (min-width: 767px) {
+					display: none;
+				}
+			}
 
 			i {
 				margin-left: 10px;
@@ -38,16 +76,27 @@
 .content-layout {
 	position: relative;
 	flex-direction: row;
+
 	.scr-sider {
 		min-height: calc(100vh - 64px);
+
+		@media (max-width: 767px) {
+			display: none;
+		}
 	}
-	
+
 	&.sider-layout-logged-in {
 		min-height: calc(100vh - 64px);
 
 
 		.ant-layout.inner-layout {
 			padding: 12px;
+		}
+	}
+
+	.scr-drawer {
+		@media (min-width: 768px) {
+			display: none;
 		}
 	}
 }

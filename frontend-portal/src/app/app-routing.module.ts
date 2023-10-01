@@ -17,9 +17,18 @@ const routes: Routes = [
     }
   },
   {
-    path: 'dashboard',
-    loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule),
-    canActivate: [routeGuard]
+    path: 'admin', loadChildren: () => import('./modules/admin/admin.module').then(m => m.AdminModule),
+    canActivate: [routeGuard],
+    data: {
+      roles: ['admin'],
+    }
+  },
+  {
+    path: 'user', loadChildren: () => import('./modules/user/user.module').then(m => m.UserModule),
+    canActivate: [routeGuard],
+    data: {
+      roles: ['user'],
+    }
   },
 ];
 

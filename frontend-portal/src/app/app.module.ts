@@ -8,7 +8,7 @@ import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NzLayoutModule } from "ng-zorro-antd/layout";
 import { NzAvatarModule } from "ng-zorro-antd/avatar";
@@ -22,15 +22,9 @@ import { NzButtonModule } from "ng-zorro-antd/button";
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { NavigationModule } from './core/components/navigation/navigation.component';
 import { LoginPageComponent } from './core/pages/login-page/login-page.component';
-
-import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { environment } from '../environments/environment';
-import { provideAuth, getAuth } from '@angular/fire/auth';
-import { provideDatabase, getDatabase } from '@angular/fire/database';
-import { provideFirestore, getFirestore } from '@angular/fire/firestore';
-import { provideMessaging, getMessaging } from '@angular/fire/messaging';
-import { provideStorage, getStorage } from '@angular/fire/storage';
 import { EnvServiceProvider } from './core/services/env.service.provider';
+import { JwtInterceptorService } from './core/services/jwt-interceptor.service';
+import { ErrorInterceptorService } from './core/services/error-interceptor.service';
 
 registerLocaleData(en);
 
@@ -56,19 +50,15 @@ registerLocaleData(en);
     NzIconModule,
     NzButtonModule,
     NzNotificationModule,
+    NzDrawerModule,
 
     // Application Dependencies
     NavigationModule,
-
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAuth(() => getAuth()),
-    provideDatabase(() => getDatabase()),
-    provideFirestore(() => getFirestore()),
-    provideMessaging(() => getMessaging()),
-    provideStorage(() => getStorage()),
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true },
     EnvServiceProvider,
   ],
   bootstrap: [AppComponent]

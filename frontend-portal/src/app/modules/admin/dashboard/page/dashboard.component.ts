@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { auth$ } from 'src/app/core/stores/auth.repository';
 import { user$ } from 'src/app/core/stores/user.repository';
 
 @Component({
@@ -9,7 +8,7 @@ import { user$ } from 'src/app/core/stores/user.repository';
 })
 export class DashboardComponent implements OnInit {
 
-  user$ = auth$;
+  user$ = user$;
 
   constructor() { }
 
