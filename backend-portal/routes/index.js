@@ -5,5 +5,6 @@ router
 	.post('/login', controller.login)
 	.use('/users', require('./users'))
 	.use('/config', require('./config'))
+	.use('/marketing', require('./marketing'))
 
 module.exports = router;

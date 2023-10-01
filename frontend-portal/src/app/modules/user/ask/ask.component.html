@@ -1,1 +1,46 @@
-<p>ask works!</p>
+<h1>Marketing</h1>
+
+<div id="formBorder" *ngIf="isFormVisible">
+	<div class="spin" *ngIf="loading.init" [@fadeInOut]>
+		<ng-template #indicatorTemplate><span nz-icon nzType="loading"></span></ng-template>
+		<nz-spin nzSimple [nzIndicator]="indicatorTemplate" [nzSize]="'large'"></nz-spin>
+	</div>
+	<form nz-form [formGroup]="marketForm" class="login-form">
+		<nz-form-item>
+			<nz-form-control nzErrorTip="Please Enter Product Name">
+				<nz-input-group [nzSize]="'large'">
+					<input type="text" nz-input formControlName="productName" placeholder="Product Name" />
+				</nz-input-group>
+			</nz-form-control>
+		</nz-form-item>
+		<nz-form-item>
+			<nz-form-control nzErrorTip="Please Enter Product Description">
+				<nz-input-group [nzSize]="'large'">
+					<input type="text" nz-input formControlName="productDescription" placeholder="Product Description" />
+				</nz-input-group>
+			</nz-form-control>
+		</nz-form-item>
+		<nz-form-item>
+			<nz-form-control nzErrorTip="Please Enter Product Category">
+				<nz-input-group [nzSize]="'large'">
+					<input type="text" nz-input formControlName="productCategory" placeholder="Product Category" />
+				</nz-input-group>
+			</nz-form-control>
+		</nz-form-item>
+		<nz-form-item>
+			<nz-form-label nzFor="slider">Age Range</nz-form-label>
+			<nz-form-control>
+				<nz-slider id="slider" nzRange [nzMin]="0" [nzMax]="100" [nzMarks]="marks" formControlName="ageRange"></nz-slider>
+			</nz-form-control>
+		</nz-form-item>
+		<button nz-button [nzLoading]="loading.update" nzType="primary" style="margin-top: 15px;" (click)="submit()">Ask</button>
+	</form>
+</div>
+
+<div id="formBorder" *ngIf="!isFormVisible && output">
+	<div class="card" *ngFor="let item of output">
+		<p *ngFor="let key of ObjectKeys(item)"><span class="bold">{{key}}:</span> {{item[key]}}</p>
+	</div>
+</div>
+
+<nz-alert *ngIf="!isFormVisible && !output" [nzShowIcon]="true" nzType="error">Unexpected Output from Assistant</nz-alert>
